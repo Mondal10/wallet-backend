@@ -1,4 +1,9 @@
 const express = require("express");
+const cors = require('cors');
+
+const { v1RoutesInit } = require("./v1Routes");
+
+const PORT = process.env.PORT || 8000;
 
 const serverInit = async () => {
     const app = express();
@@ -9,27 +14,17 @@ const serverInit = async () => {
     // Middleware for parsing JSON
     app.use(express.json({ limit: '1MB' }));
 
-    // Header setup for Cross Origin Access
-    app.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', '*');
-
-        if (req.method == 'OPTIONS') {
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE');
-
-            return res.status(200).json({});
-        }
-
-        // So that it won't block the incoming request
-        // and go through other routes
-        next();
-    });
+    // Adds headers: Access-Control-Allow-Origin: *, for now all requests are allowed
+    app.use(cors());
 
     // Routes
-    // Todo: Add routes
+    // All the /v1/<path> routes
+    v1RoutesInit(app);
 
     // Handle 404 error
     app.use('/', (req, res, next) => {
-        const error = new Error('Not Found');
+        console.log('404');
+        const error = new Error('Route Not Found');
 
         error.status = 404;
         next(error);
@@ -43,6 +38,9 @@ const serverInit = async () => {
             message
         });
     });
+
+
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
 
 module.exports = { serverInit };
