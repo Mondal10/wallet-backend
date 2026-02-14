@@ -2,6 +2,8 @@
 
 A RESTful wallet system built using **Node.js, Express, MongoDB Atlas, and Mongoose**.
 
+Hosted postman collection available [here](https://documenter.getpostman.com/view/52395210/2sBXcBo2uN).
+
 Supports:
 
 - Wallet setup
