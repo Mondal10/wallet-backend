@@ -23,7 +23,6 @@ const serverInit = async () => {
 
     // Handle 404 error
     app.use('/', (req, res, next) => {
-        console.log('404');
         const error = new Error('Route Not Found');
 
         error.status = 404;
