@@ -40,7 +40,11 @@ const walletSetup = async (req, res, next) => {
     try {
         const { name, balance = 0 } = req.body;
 
-        // Rounding off the balance value
+        if (balance < 0) {
+            return res.status(400).json({ message: "Balance must be a positive number" });
+        }
+
+        // Rounding off the balance value to 4 decimal places
         const normalizedBalance = roundTo4(balance);
 
         // Create wallet
