@@ -58,7 +58,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 ---
 
-## 💳 Transaction Model
+## Transaction Model
 
 | Field         | Type                    | Required | Description                                          |
 | ------------- | ----------------------- | -------- | ---------------------------------------------------- |
@@ -75,9 +75,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 # API Endpoints
 
----
-
-## 1️⃣ Setup Wallet
+## 1. Setup Wallet
 
 **POST** `/wallet/setup`
 
@@ -104,7 +102,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 ---
 
-## 2️⃣ Make Transaction
+## 2. Make Transaction
 
 **POST** `/wallet/transact/:walletId`
 
@@ -129,7 +127,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 ---
 
-## 3️⃣ Get Wallet Details
+## 3. Get Wallet Details
 
 **GET** `/wallet/:walletId`
 
@@ -146,7 +144,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 ---
 
-## 4️⃣ Fetch Transactions
+## 4. Fetch Transactions
 
 **GET**
 
