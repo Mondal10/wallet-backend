@@ -10,6 +10,7 @@ const transactionSchema = new mongoose.Schema({
     amount: {
         type: mongoose.Schema.Types.Decimal128,
         required: true,
+        min: [0, 'Amount must be a positive number.'], // Ensures the value is >= 0 (since we have credit and debit indicator)
     },
     balance: {
         type: mongoose.Schema.Types.Decimal128,

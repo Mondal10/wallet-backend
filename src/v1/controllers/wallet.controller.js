@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
-const { roundTo4 } = require('../../common/utils');
-
 const Wallet = require("../models/wallet.model");
 const Transaction = require("../models/transaction.model");
 
+const { roundTo4 } = require('../../common/utils');
 const { TRANSACTION_TYPE } = require("../../common/constants");
 
 const getWalletData = async (req, res, next) => {
@@ -28,8 +27,6 @@ const getWalletData = async (req, res, next) => {
             date: wallet.createdAt,
         });
     } catch (error) {
-        // console.log('error::', error);
-        // next(error);
         return res.status(500).json({ error: error });
     }
 };
@@ -83,8 +80,6 @@ const walletSetup = async (req, res, next) => {
         });
 
     } catch (error) {
-        // console.log('error::', error);
-        // next(error);
         return res.status(500).json({ error: error });
     } finally {
         await session.abortTransaction();
