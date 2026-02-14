@@ -76,7 +76,7 @@ const makeTransaction = async (req, res, next) => {
         await session.commitTransaction();
 
         return res.status(200).json({
-            transactionId: transaction[0]._id,
+            id: transaction[0]._id,
             balance: Number.parseFloat(normalizedBalance.toString()),
         });
 
@@ -116,7 +116,7 @@ const getAllTransactions = async (req, res, next) => {
         const transactions = await Transaction.find({ walletId }).sort({ createdAt: -1 }).skip(skipNum).limit(limitNum);
 
         const formatted = transactions.map((txn) => ({
-            transactionId: txn._id,
+            id: txn._id,
             walletId: txn.walletId,
             amount: Number.parseFloat(txn.amount.toString()),
             balance: Number.parseFloat(txn.balance.toString()),
