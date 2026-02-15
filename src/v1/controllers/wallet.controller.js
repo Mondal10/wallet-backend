@@ -71,7 +71,7 @@ const walletSetup = async (req, res, next) => {
 
         await session.commitTransaction();
 
-        return res.status(200).json({
+        return res.status(201).json({
             id: wallet[0]._id,
             balance: Number.parseFloat(wallet[0].balance.toString()),
             transactionId: transaction[0]._id,

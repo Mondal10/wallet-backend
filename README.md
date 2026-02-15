@@ -67,7 +67,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 | `amount`      | Decimal128              | Yes      | Transaction amount (stored with 4 decimal precision) |
 | `balance`     | Decimal128              | No       | Wallet balance after transaction                     |
 | `description` | String                  | No       | Transaction description (trimmed)                    |
-| `type`        | String (CREDIT / DEBIT) | Yes      | Transaction type                                     |
+| `type`        | String (credit / debit) | Yes      | Transaction type                                     |
 | `createdAt`   | Date                    | Auto     | Transaction creation timestamp                       |
 | `updatedAt`   | Date                    | Auto     | Last updated timestamp                               |
 
@@ -104,7 +104,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 ## 2. Make Transaction
 
-**POST** `/wallet/transact/:walletId`
+**POST** `/transaction/transact/:walletId`
 
 ### Request Body
 
@@ -149,7 +149,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 **GET**
 
 ```
-/wallet/transactions?walletId=walletId&skip=0&limit=10
+/transaction/transactions?walletId=walletId&skip=0&limit=10
 ```
 
 ### Response
@@ -174,7 +174,7 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 - Monetary values are stored using **MongoDB Decimal128**
 - All balances and amounts are normalized to **4 decimal precision**
-- Decimal values are converted to Number before sending API response
+- Decimal values are converted to Floating point number before sending API response
 
 ---
 

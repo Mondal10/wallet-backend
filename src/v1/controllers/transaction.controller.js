@@ -75,7 +75,7 @@ const makeTransaction = async (req, res, next) => {
 
         await session.commitTransaction();
 
-        return res.status(200).json({
+        return res.status(201).json({
             id: transaction[0]._id,
             balance: Number.parseFloat(normalizedBalance.toString()),
         });
