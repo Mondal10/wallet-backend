@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Parser } = require("@json2csv/plainjs");
 
 const Wallet = require("../models/wallet.model");
 const Transaction = require("../models/transaction.model");
@@ -131,7 +132,61 @@ const getAllTransactions = async (req, res, next) => {
     }
 };
 
+const exportTransactions = async (req, res, next) => {
+    try {
+        const { walletId } = req.params;
+
+        if (!walletId || !mongoose.Types.ObjectId.isValid(walletId)) {
+            return res.status(400).json({ message: "Invalid wallet id" });
+        }
+
+        const wallet = await Wallet.findById(walletId);
+
+        if (!wallet) {
+            return res.status(404).json({ message: "Wallet not found" });
+        }
+
+        const transactions = await Transaction.find({ walletId }).sort({
+            createdAt: -1,
+        });
+
+        const formatted = transactions.map((tx) => ({
+            id: tx._id.toString(),
+            walletId: tx.walletId.toString(),
+            amount: Number.parseFloat(tx.amount.toString()),
+            balance: Number.parseFloat(tx.balance.toString()),
+            description: tx.description || "",
+            date: tx.createdAt,
+            type: tx.type,
+        }));
+
+        const fields = [
+            "id",
+            "walletId",
+            "amount",
+            "balance",
+            "description",
+            "date",
+            "type",
+        ];
+
+        const parser = new Parser({ fields });
+        const csv = parser.parse(formatted);
+
+        res.setHeader("Content-Type", "text/csv");
+        res.setHeader(
+            "Content-Disposition",
+            "attachment; filename=transactions.csv"
+        );
+
+        return res.status(200).send(csv);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     makeTransaction,
     getAllTransactions,
+    exportTransactions,
 };

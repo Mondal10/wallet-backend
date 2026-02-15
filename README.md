@@ -170,6 +170,20 @@ https://wallet-backend-7vnk.onrender.com/v1
 
 ---
 
+## 5. Export Transactions
+
+**GET**
+
+```
+/transaction/:walletId/export
+```
+
+### Response
+
+`csv file`
+
+---
+
 # Precision Handling
 
 - Monetary values are stored using **MongoDB Decimal128**
