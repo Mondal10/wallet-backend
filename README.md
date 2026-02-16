@@ -155,17 +155,22 @@ https://wallet-backend-7vnk.onrender.com/v1
 ### Response
 
 ```json
-[
-  {
-    "id": "transactionId",
-    "walletId": "walletId",
-    "amount": 5.25,
-    "balance": 15.75,
-    "description": "Recharge",
-    "date": "2026-02-14T11:00:00.000Z",
-    "type": "credit"
-  }
-]
+{
+  "skip": 0,
+  "limit": 10,
+  "total": 1405,
+  "transactions": [
+    {
+      "id": "transactionId",
+      "walletId": "walletId",
+      "amount": 5.25,
+      "balance": 15.75,
+      "description": "Recharge",
+      "date": "2026-02-14T11:00:00.000Z",
+      "type": "credit"
+    }
+  ]
+}
 ```
 
 ---

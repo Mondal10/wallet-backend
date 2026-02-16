@@ -114,6 +114,7 @@ const getAllTransactions = async (req, res, next) => {
             return res.status(400).json({ message: "limit must be a positive integer" });
         }
 
+        const totalTransactionCount = await Transaction.countDocuments({ walletId });
         const transactions = await Transaction.find({ walletId }).sort({ createdAt: -1 }).skip(skipNum).limit(limitNum);
 
         const formatted = transactions.map((txn) => ({
@@ -126,7 +127,12 @@ const getAllTransactions = async (req, res, next) => {
             type: txn.type,
         }));
 
-        return res.status(200).json(formatted);
+        return res.status(200).json({
+            skip: skipNum,
+            limit: limitNum,
+            total: totalTransactionCount,
+            transactions: formatted
+        });
     } catch (error) {
         return res.status(500).json({ message: error });
     }
